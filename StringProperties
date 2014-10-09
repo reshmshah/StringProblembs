@@ -1,0 +1,70 @@
+ class Program
+    {
+        static void Main(string[] args)
+        {
+            String str1 = "abac";
+            string str2 = "cabd";
+
+            bool Isanagram = StringAnagram(str1, str2);
+            Console.WriteLine("Strings " + str1 + " And " + str2 + " are in Anagram " + Isanagram);
+            Console.ReadLine();
+            
+        }
+        private static bool StringAnagram(string str1, string str2)
+        {
+            Hashtable check = new Hashtable();
+            char[] stringchar1 = str1.ToCharArray();
+            char[] stringchar2= str2.ToCharArray();
+            if(str1 == string.Empty || str2 == string.Empty)
+                   return false;
+            if (str1.Length != str2.Length)
+                return false;
+            check.Add(stringchar1[0],1);
+            for(int i= 1; i<= stringchar1.Length-1; i++)
+            {
+                if(check.ContainsKey(stringchar1[i]))
+                {
+                    int count = (int)check[stringchar1[i]];
+                    //check.Remove(stringchar1[i]);
+                   // check.Add(stringchar1[i],++count);
+                    check[stringchar1[i]] = (object)++count;
+                }
+                else
+                    check.Add(stringchar1[i],1);
+            }
+            for (int i = 0; i <= stringchar2.Length - 1; i++)
+            {
+                 if(check.ContainsKey(stringchar2[i]))
+                {
+                    int count = (int)check[stringchar2[i]];
+                    check[stringchar2[i]] = (object)--count;
+                }
+                else
+                 {
+                     return false;
+                 }
+            }
+            ICollection myvalues;
+            myvalues = check.Values;
+            foreach(object count in myvalues)
+            {
+                if((int)count  != 0)
+                {
+                    return false;
+                }
+
+            }
+            return true;
+        }
+        private static bool StringPalidrom(string str1)
+        {
+           for(int i=0,j= str1.Length-1;i <= (str1.Length-1)/2; i++,j--)
+            {
+                if(str1[i] != str1[j])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
