@@ -1,0 +1,61 @@
+ class Program
+    {
+        public static string sentence = "This is my book";
+        static void Main(string[] args)
+        {
+            string[] words = getwords();
+             for (int j = words.Length - 1, i = 0; j >= (words.Length - 1)/2; i++, j--)
+            {
+                string temp = words[i];
+                words[i] = words[j];
+                words[j] = temp;
+            }
+
+            for (int j = 0;j<= words.Length - 1;j++)
+            {
+                words[j] = reversestring(words[j]);
+            }
+            Console.WriteLine("The original String: " + sentence + " and Reversed String : {0}" , words.ToString());
+            Console.ReadLine();
+           // string str3 = reversestring("abcdef");
+        }
+
+        public static string[] getwords()
+        {
+            Char space = ' ';
+           return(sentence.Split(space));
+        }
+        public static string reversestring(string str)
+        {
+            if (str.Length > 1)
+            {
+                int lenghth = str.Length / 2;
+               char[] strarray = str.ToCharArray();
+                for (int i = 0, j = str.Length-1; i <= (lenghth - 1); i++, j--)
+                {
+                 
+                    char[] swapped = Swap(strarray[i], strarray[j]);
+                    //char temp = strarray[i];
+                    //strarray[i] = strarray[j];
+                    //strarray[j] = temp;
+                    strarray[i] = swapped[0];
+                    strarray[j] = swapped[1];
+                }
+                return (new string(strarray));
+           }
+            else
+                return str; 
+        }
+        private static char[] Swap(char p1, char p2)
+        {
+             p1 ^=  p2;
+             p2 ^=  p1;
+             p1 ^=  p2;
+
+            char[] arr=new char[2]; 
+            arr[0]= p1;
+            arr[1]= p2;
+
+            return (arr);
+        }
+    }
