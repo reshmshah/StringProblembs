@@ -1,0 +1,59 @@
+class Program
+    {
+        static void Main(string[] args)
+        {
+            string str = "Hello How r u?";
+
+            Console.WriteLine(CountCharacters(str));
+            Console.ReadLine();
+        }
+
+        public static string CountCharacters(string str)
+        {
+             StringBuilder sb = new StringBuilder();
+
+            if(str.Length > 0 )
+            {
+                str = getChar(str);
+                var letterstore = new Dictionary<string, int>();
+                int count=1;
+                letterstore.Add(str[0].ToString(),count);
+                for(int i =1;i<= str.Length-1;i++)
+                {
+                    if( letterstore.ContainsKey(str[i].ToString()))
+                    {
+                        int count_temp = (int)letterstore[str[i].ToString()];
+                        letterstore[str[i].ToString()] = (int)++count_temp;
+                     }
+                    else
+                        letterstore.Add(str[i].ToString(), count);
+
+                }
+                int max = 0;
+                foreach(var item  in letterstore.Values)
+                {
+                    if (item > max)
+                        max = item;
+                }
+               
+                foreach(var item in letterstore)
+                {
+                    if (item.Value == max)
+                        sb.Append(item.Key);
+                }
+                sb.Append(" ");
+                sb.Append(max.ToString());
+                return sb.ToString();
+                
+            }
+            return sb.ToString();
+
+        }
+        public static string getChar(string str)
+        {
+           string str1 =   str.ToLower();
+           return new string(str.ToCharArray()
+            .Where(c => !Char.IsWhiteSpace(c))
+            .ToArray());
+       }
+    }
