@@ -1,0 +1,21 @@
+class Program
+    {
+        static void Main(string[] args)
+        {
+            string str = "ABCAFGH";
+             bool  Isrepeate = isUniqueChars2(str);
+            Console.WriteLine("Charater is repeatable  " + Isrepeate);
+            Console.ReadLine();
+         }
+
+         public static bool isUniqueChars2(String str) 
+         {   bool[] char_set = new bool[256];
+         for (int i = 0; i < str.Length; i++)
+         {
+             int val = (str.ToCharArray())[i];
+             if (char_set[val]) return false;
+             char_set[val] = true;
+         }  
+             return true; 
+         } 
+    }
