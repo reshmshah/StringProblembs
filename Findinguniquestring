@@ -1,0 +1,52 @@
+class Program
+    {
+        public static String samplestr = "Arnav is boy. Arnav is tall.";//"ak bk ck dk bk dk ck lk";
+        static void Main(string[] args)
+        {
+            string[] words = getwords();
+            string uniqueword = FindUniqueStr(words);
+            Console.Write(uniqueword);
+            Console.ReadLine();
+
+        }
+
+        public static string FindUniqueStr(string[] words)
+        {
+           
+            System.Collections.Hashtable Checkhashtable = new System.Collections.Hashtable();
+            
+            int count=1;
+            Checkhashtable.Add(words[0], count);
+            for (int i = 1; i <= words.Length - 1; i++)
+            {
+                if (Checkhashtable.ContainsKey(words[i]))
+                {
+                    int count_temp = (int)Checkhashtable[words[i]];
+                    // check.Add(stringchar1[i],++count);
+                    Checkhashtable[words[i]] = (object)++count_temp;
+                }
+                else
+                    Checkhashtable.Add(words[i], count);
+
+            }
+            string str = "";
+            System.Collections.ICollection myvalues = Checkhashtable.Values;
+           
+            foreach (DictionaryEntry de  in Checkhashtable)
+            {
+             
+                if ((int)de.Value == 1)
+                {
+                    str = str + " " +(string)de.Key;
+                }
+            }
+            return str;
+       }
+        public static string[] getwords()
+        {
+            char space=' ';
+            return (samplestr.Split(space));
+        }
+
+
+    }
