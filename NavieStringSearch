@@ -1,0 +1,42 @@
+class Program
+    {
+
+        static void Main(string[] args)
+        {
+            //string s1 = "DROP";
+            //string s2 = "PHIL DROPPED HIS PHONE";
+
+            string s1 = "aab";
+            string s2 = "aaab";
+
+    bool       issubstring= Search(s1, s2);
+
+    Console.WriteLine("s1 is substring of s2" + issubstring);
+           Console.ReadLine();
+        }
+        public static bool Search(string ToFind, string ToSearch)
+        {
+            bool issubstring = false;
+            if (ToFind.Length > 0 && ToSearch.Length > 0)
+            {
+                for(int StartIndex = 0;StartIndex<= ToSearch.Length-ToFind.Length; StartIndex++)
+                {
+                    int matchcount = 0;
+                    while (String.Compare(ToFind, matchcount, ToSearch,StartIndex + matchcount,1) == 0)
+                    {
+                        matchcount++;
+                        if(ToFind.Length == matchcount)
+                        {
+                            issubstring = true;
+                            StartIndex += matchcount - 1;
+                            break;
+                        }
+
+                    }
+
+                }
+            }
+            return issubstring;
+        }
+       
+    }
